@@ -8,7 +8,7 @@ Generally, each assignment will operate off of its own _branch_ while the _main_
 
 Before cloning this repo, decide what kind of development environment you'd like to work from. Generally, you have three options:
 
-### 1. A cloud-based "Dev Container" setup in GitHub Codespaces
+### 1. A cloud-based "Dev Container" setup in GitHub Codespaces (Default IDE: VS Code, compatible with PyCharm)
    
    *Choose this option if you have a fast and stable internet connection and like the idea of a 1-click setup (including Poetry installation!)*
 
@@ -18,7 +18,7 @@ Before cloning this repo, decide what kind of development environment you'd like
    
    That's pretty much it. Wait for the environment to build and for your startup commands to execute until you are greeted with a terminal prompt.
 
-### 2. A local Dev Container-based setup (Demonstrated in VS Code, compatible with PyCharm)
+### 2. A local Dev Container-based setup (Default IDE: VS Code, compatible with PyCharm)
    
    *Choose this if you want much of the convenience of a 1-click setup while working from a local copy of your code. Working this way might requires installing a few basic dependencies and may at times require you to acquire some passing knowledge of how Docker containers work, but this method should still be pretty painless. Please create a discussion or issue if you are running into errors and stay tuned for more details on containers.*
 
