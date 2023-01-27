@@ -48,6 +48,6 @@ Before cloning this repo, decide what kind of development environment you'd like
 
 Once your development environment is properly set up, closely follow the instructions at [this Stack Overflow thread](https://stackoverflow.com/a/30352360/1526293).
 
-You should name your repository with your WUSTL ID, and you should create your private repository within the `wustl-data` organization.
+You should name your repository with your WUSTL ID, and you should create your private repository within the `wustl-data` organization. Do not add a README or .gitignore from the GitHub UI.
 
 A high-level overview of the mechanics of the above operations can be deduced from [this tutorial](https://devopscube.com/set-git-upstream-respository-branch/).
