@@ -65,7 +65,7 @@ git push --mirror https://github.com/wustl-data/<your wustl username>
 cd .. 
 
 # delete your local version of the template repo
-rm -rf 
+rm -rf sp23-assignments
 
 # clone the repo locally again from your private repo
 git clone https://github.com/wustl-data/<your wustl username> 
