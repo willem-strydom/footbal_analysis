@@ -13,6 +13,10 @@ pytest = "^7.2.1"
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.9.0"
 
+
+[tool.poetry.group.autograder.dependencies]
+gitpython = "^3.1.30"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
