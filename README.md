@@ -79,6 +79,6 @@ git remote add upstream https://github.com/wustl-data/sp23-assignments
 
 
 
-You should name your repository with your WUSTL ID, and you should create your private repository within the `wustl-data` organization. Do not add a README or .gitignore from the GitHub UI.
+You should name your repository with your WUSTL Username, and you should create your private repository within the `wustl-data` organization. Do not add a README or .gitignore from the GitHub UI.
 
 A high-level overview of the mechanics of the above operations can be deduced from [this tutorial](https://devopscube.com/set-git-upstream-respository-branch/).
