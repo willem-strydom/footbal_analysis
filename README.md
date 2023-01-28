@@ -46,7 +46,38 @@ Before cloning this repo, decide what kind of development environment you'd like
 
 ## Cloning the repo and setting up your submission repo.
 
-Once your development environment is properly set up, closely follow the instructions at [this Stack Overflow thread](https://stackoverflow.com/a/30352360/1526293).
+Once your development environment is properly set up, follow these instructions, modified from [this Stack Overflow thread](https://stackoverflow.com/a/30352360/1526293), carefully. 
+
+1. Create a private repo named as your WUSTL username in the `wustl-data` GitHub Organization.
+   - Don't add a README or .gitignore just yet.
+2. Run:
+```shell
+# clone the template repo
+git clone --bare https://github.com/wustl-data/sp23-assignments 
+
+# move your *current directory* to the cloned repo's folder
+cd sp23-assignments
+
+# push a version of the repo to your private repo
+git push --mirror https://github.com/wustl-data/<your wustl username>
+
+# go back to your original working directory
+cd .. 
+
+# delete your local version of the template repo
+rm -rf 
+
+# clone the repo locally again from your private repo
+git clone https://github.com/wustl-data/<your wustl username> 
+
+# Change your current directory to your local copy of the repo, now in a different folder
+cd <your wustl username>
+
+# Add the template repo as an remote repo named 'upstream'
+git remote add upstream https://github.com/wustl-data/sp23-assignments
+```
+
+
 
 You should name your repository with your WUSTL ID, and you should create your private repository within the `wustl-data` organization. Do not add a README or .gitignore from the GitHub UI.
 
