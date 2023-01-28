@@ -1,7 +1,12 @@
+import os
 from pathlib import Path
 from importlib.util import find_spec
 from git import Repo
-import os
+
+try:
+    import fake_records
+except:
+    pass
 
 
 def test_module_exists():
@@ -10,6 +15,18 @@ def test_module_exists():
 
 def test_faker_installed():
     assert find_spec("faker")
+
+
+def test_generate():
+    df = fake_records.generate()
+    assert len(df) == 1000
+    assert {
+        "First Name",
+        "Last Name",
+        "Birthday",
+        "Email",
+        "Phone Number",
+    } == df.columns()
 
 
 def test_data_folder_ignored():
