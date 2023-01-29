@@ -2,13 +2,12 @@
 
 This repository contains template code for the assignments in the course. It will additionally serve as an _upstream repository_ to source potential updates and corrections for the assignments.
 
-Assuming you've set up your repo according to the instructions below, you can run:
+Assuming you've set up your repo according to the instructions below, you can run the following to pull the latest updates and corrections from the template repository and make sure your code is up-to-date:
 
 ```
 git pull upstream <branch name>
 ```
 
-to pull the latest updates and corrections from the template repository.
 
 Generally, each assignment will operate off of its own _branch_ while the _main_ branch will include the base template for an operational environment.
 
