@@ -21,7 +21,7 @@ Before cloning this repo, decide what kind of development environment you'd like
 
    #### Basic Steps
 
-   1. Click "Create a Codespace on main" from the big green "Code" button at the top of the repo.
+   1. Click "Create a Codespace on <branch>" from the big green "Code" button at the top of the repo.
    
    That's pretty much it. Wait for the environment to build and for your startup commands to execute until you are greeted with a terminal prompt.
 
