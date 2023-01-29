@@ -41,16 +41,19 @@ _Choose this if you want much of the convenience of a 1-click setup while workin
 
 ### 3. A completely local setup with manually installed development dependencies.
 
-_Choose this option if you want/require fine-grained control of your environment and are comfortable with installing and configuring development dependencies on your own or would like to challenge yourself to do so. This option might require you to install and configure one or more of the following dependencies at various points in the course:_
+_Choose this option if you want/require fine-grained control of your environment and are comfortable with installing and configuring development dependencies on your own or would like to challenge yourself to do so._
 
-- A recent version of Python (I prefer to use [pyenv](https://github.com/pyenv/pyenv) to manage my Python installations).
-- The [poetry](https://python-poetry.org/) package manager.
-- The [pre-commit](https://pre-commit.com/) framework for managing git hooks.
-- The [black](https://github.com/psf/black) code formatter.
-- The [ruff](https://github.com/charliermarsh/ruff) linter.
-- A PostgreSQL database
+You will need, at minimum:
 
-Post in Discussions if you have any questions or run into any problems on your own.
+- A recent version of Python (I prefer to use [pyenv](https://github.com/pyenv/pyenv#installation) to manage my Python installations).
+- If you want to use poetry: The [poetry](https://python-poetry.org/docs/) package manager.
+- A _Unix_ shell is **highly recommended**.
+  - On macs: Your default terminal is a Unix shell.
+  - On Windows: You can use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) for a fully-featured Linux environment and terminal shell. If you insist on working fully on Windows, [Git Bash](https://gitforwindows.org/) _emulates_ a unix shell, although you still may run into trouble with some commands and packages.
+
+More development dependencies may be required depending on the assignment.
+
+Make a post in Discussions if you have any questions or run into any problems on your own!
 
 ## Setting up your private repo.
 
@@ -59,41 +62,98 @@ Once you have chosen an environment method, follow these instructions carefully 
 1. Create a private repo named as your WUSTL username in the `wustl-data` GitHub Organization.
    - Don't add a README or .gitignore just yet.
 2. _From a local terminal shell (i.e. not Codespaces)_, run:
+   1. Clone the template repo
+      ```bash
+      git clone --bare https://github.com/wustl-data/sp23-assignments
+      ```
+      ```mermaid
+      flowchart LR
+         template([sp23-assignments]) -->|clone| local([Your Local Repo])
+      ```
+      >
+   2. Move your _current directory_ to the cloned repo's folder
+      ```bash
+      cd sp23-assignments
+      ```
+   3. Push a version of the repo to your private repo
+      ```bash
+      git push --mirror https://github.com/wustl-data/<your wustl username>
+      ```
+      ```mermaid
+      flowchart LR
+         template([sp23-assignments])--> local([Your Local Repo])
+         local-->|push| origin([Your Private Repo])
+      ```
+   4. Go back to your original working directory
+      ```bash
+      cd ..
+      ```
+   5. Delete your local version of the template repo
+      ```bash
+      rm -rf sp23-assignments
+      ```
+      ```mermaid
+      flowchart LR
+         origin([Your Private Repo])
+      ```
+3. _In your environment of choice_ (Codespace/Dev Container/Local Setup), do the following:
 
-```shell
-# clone the template repo
-git clone --bare https://github.com/wustl-data/sp23-assignments
+   1. Clone the repo using the URL from your private repo on GitHub:
+      ```bash
+      git clone https://github.com/wustl-data/<your wustl username>
+      ```
+      ```mermaid
+      flowchart LR
+         origin(["Your Private Repo #quot;origin#quot;"])-->|clone| local([Your Local Repo])
+      ```
+   2. Change your current directory to your local copy of the repo, now in a different folder
 
-# move your *current directory* to the cloned repo's folder
-cd sp23-assignments
+      ```bash
+      cd <your wustl username>
+      ```
 
-# push a version of the repo to your private repo
-git push --mirror https://github.com/wustl-data/<your wustl username>
+   3. Add the `sp23-assignments` repo as an remote repo named 'upstream'.
 
-# go back to your original working directory
-cd ..
+      ```bash
+      git remote add upstream https://github.com/wustl-data/sp23-assignments
+      ```
 
-# delete your local version of the template repo
-rm -rf sp23-assignments
+      ```mermaid
+      flowchart LR
+         origin(["Your Private Repo #quot;origin#quot;"])<-.-> local([Your Local Repo])
+         upstream(["sp23-assignments #quot;upstream#quot;"])-.->|remote add| local
+      ```
 
-# clone the repo locally again from your private repo
-# *Do this step and the following steps from your preferred development environment*
-git clone https://github.com/wustl-data/<your wustl username>
+Here's how our git setup will work in practice:
 
-# Change your current directory to your local copy of the repo, now in a different folder
-cd <your wustl username>
-
-# Add the template repo as an remote repo named 'upstream'
-git remote add upstream https://github.com/wustl-data/sp23-assignments
+```mermaid
+---
+title: A "Private Fork" Setup
+---
+flowchart LR
+   Upstream -->|fetch updates| Local
+   Local -->|push code to share/grade| Origin
+   Origin -->|pull code from other machines| Local
 ```
 
-A high-level overview of the reasoning and architecture implemented by the above operations can be deduced from [this tutorial](https://devopscube.com/set-git-upstream-respository-branch/).
+## Accessing assignment branches
 
-You can check out an assignment branch with a command such as the following:
+First, make sure you have the latest copy of the repo, especially if updates have been pushed or you are beginning a new assignment.
 
-```shell
-git fetch
-git switch -t upstream/hw1
+```bash
+git fetch upstream
 ```
 
-> the -t flag sets the **t**racking branch to the `upstream` version of the branch instead of the `origin` version of the branch (the default). This will make it easier to notice changes you need to pull when you run `git status` and running `git pull` will be configured to pull from `upstream` by default.
+The first time you need to switch to a new assignment branch, you will need to create a new local branch that tracks the version on the `upstream` repo.
+
+```bash
+git switch --track upstream/hw1
+```
+
+> Setting the tracking branch to the version on the `upstream` repo instead of the version on the `origin` repo (the default) makes it easier to notice your repo is outdated with `git status` as well as making it the default branch for fetching/pulling.
+
+Any subsequent time you need to switch to the branch:
+
+```bash
+git switch hw1
+```
