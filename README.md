@@ -88,3 +88,12 @@ git remote add upstream https://github.com/wustl-data/sp23-assignments
 ```
 
 A high-level overview of the reasoning and architecture implemented by the above operations can be deduced from [this tutorial](https://devopscube.com/set-git-upstream-respository-branch/).
+
+You can check out an assignment branch with a command such as the following:
+
+```shell
+git fetch
+git switch -t upstream/hw1
+```
+
+> the -t flag sets the **t**racking branch to the `upstream` version of the branch instead of the `origin` version of the branch (the default). This will make it easier to notice changes you need to pull when you run `git status` and running `git pull` will be configured to pull from `upstream` by default.
