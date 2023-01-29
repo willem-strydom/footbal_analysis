@@ -2,7 +2,7 @@
 
 This repository contains template code for the assignments in the course. It will additionally serve as an _upstream repository_ to source potential updates and corrections for the assignments.
 
-Assuming you've set up your repo according to one of our suggested [dev environment setups](https://wustl-data.github.io/sp23/Development%20Environment/choose_env), you can instantly pull the latest updates and corrections from the `upstream` remote to make sure your code is up-to-date:
+Assuming you've set up your repo according to one of our suggested [dev environment setups](https://wustl-data.github.io/sp23/Development%20Environment/choose_env), you can instantly pull the latest updates and corrections from an `upstream` branch to make sure your code is up-to-date:
 
 ```
 git pull upstream hw1
