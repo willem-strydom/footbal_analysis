@@ -58,7 +58,7 @@ Once your development environment is properly set up, follow these instructions,
 
 1. Create a private repo named as your WUSTL username in the `wustl-data` GitHub Organization.
    - Don't add a README or .gitignore just yet.
-2. Run:
+2. *From a local terminal shell* (i.e. not Codespaces), run:
 ```shell
 # clone the template repo
 git clone --bare https://github.com/wustl-data/sp23-assignments 

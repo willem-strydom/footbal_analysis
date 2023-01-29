@@ -25,7 +25,7 @@
     "codespaces": {
       "repositories": {
         "wustl-data/sp23-assignments": {
-          "permissions": { "read": true }
+          "permissions": { "content": "read" }
         }
       }
     }
