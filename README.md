@@ -31,11 +31,12 @@ Before cloning this repo, decide what kind of development environment you'd like
 
    #### Basic Steps
 
-   1. Install Docker Desktop
-   2. Install VS Code
-   3. Install the Dev Container extension for VS Code. the Clone the repo. 
-   4. Open the repo in VS Code
-   5. Click the "Reopen in Container" button that pops up.
+   1. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+   2. Install [VS Code](https://code.visualstudio.com/)
+   3. Install the [Dev Container extension](vscode:extension/ms-vscode-remote.remote-containers) for VS Code
+   4. Follow the instructions below to clone the repo if you have not already. 
+   5. Open the repo in VS Code either via the GUI or by using the `code` command in your terminal.
+   6. Click the "Reopen in Container" button that pops up.
       - If you miss the window of opportunity for the button, find the "Dev Containers: Reopen in Container" option from the command palette.
 
 ### 3. A completely local setup with manually installed development dependencies.
