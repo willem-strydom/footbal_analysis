@@ -2,6 +2,8 @@
 
 This repository contains template code for the assignments in the course. It will additionally serve as an _upstream repository_ to source potential updates and corrections for the assignments.
 
+Follow the steps at [Setting Up Your Private Repo](https://wustl-data.github.io/sp23/dev_env/private_repo) to get started using this repo.
+
 To check out a newly posted assignment branch, run:
 
 ```
