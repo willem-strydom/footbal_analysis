@@ -10,9 +10,7 @@
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
   },
   "extensions": ["ms-python.python", "eamodio.gitlens"],
-  // Features to add to the dev container. More info: https://containers.dev/features.
-  // "features": {},
-
+  
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or the host.
   // "forwardPorts": [5000, 5432],
@@ -27,6 +25,11 @@
         "wustl-data/sp23-assignments": {
           "permissions": "read-all"
         }
+      }
+    },
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
       }
     }
   }
