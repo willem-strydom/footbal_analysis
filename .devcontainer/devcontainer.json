@@ -7,9 +7,7 @@
     "ghcr.io/devcontainers-contrib/features/poetry:2": {},
     "ghcr.io/devcontainers-contrib/features/pre-commit:2": {}
   },
-
-  "postCreateCommand": "poetry install",
-
+  "postCreateCommand": "git remote add upstream https://github.com/wustl-data/sp23-assignments && poetry install",
   "customizations": {
     "codespaces": {
       "repositories": {
@@ -22,7 +20,10 @@
       "settings": {
         "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
       },
-      "extensions": ["ms-python.python", "eamodio.gitlens"]
+      "extensions": [
+        "ms-python.python",
+        "eamodio.gitlens"
+      ]
     }
   }
 }
