@@ -1,25 +1,16 @@
-# CSE314A SP23 Assignments
+# CSE314 SP23 PROJECT: Sports Group
 
-This repository contains template code for the assignments in the course. It will additionally serve as an _upstream repository_ to source potential updates and corrections for the assignments.
+Our project's general focus is on the effects of jetlag, although this is something that has, to some extent, been analyzed in other data projects. In order to differentiate our project from these other analyses, our focus will be on segregating "jetlag" into two groups: jetlag induced by traveling east and jetlag induced by traveling west.
 
-Follow the steps at [Setting Up Your Private Repo](https://wustl-data.github.io/sp23/dev_env/private_repo) to get started using this repo.
+This focus is motivated by research which has shown it is more difficult for the human body to travel east than west. Thus, whether it be a team coach, player, trainer, fan, sports bettor, or other stakeholder in the process of putting on an NFL game, knowing how a team will be affected by a certain type of travel is imperative. At an even more focused level, we are interested in knowing which positional groups (i.e., defensive backs, quarterbacks, receivers, etc.) are most affected by this travel -- as knowing this information would, as referenced earlier, improve informational asymmetries for stakeholders (i.e., make stakeholders more informed about the team and what they can expect from them). 
 
-To check out a newly posted assignment branch, run:
+Methodlogy:
+- We will examine myriad datasets of NFL games. These datasets include CSVs sourced from Kaggle as well as datasets compiled using APIs.
+  -> No individual datasets have all the information we need, so the dataset we eventually manipulate will be unique to our problem.
+  -> We will fill in missing and incomplete data according to specific rules, which we will eventually list in this README.
 
-```
-git switch -t upstream/hw1
-```
+Deliverables:
+- Will update this when determined. Will most likely post the dataset somewhere, along with relevant methods, to be used for individual projects.
 
-Assuming you've set up your repo according to one of our suggested [dev environment setups](https://wustl-data.github.io/sp23/Development%20Environment/choose_env), you may now instantly pull the latest updates and corrections from an `upstream` branch to make sure your code is up-to-date. With the branch you'd like to update checked out, simply run:
-
-```
-git pull
-```
-
-> If you've failed to set `upstream` as the tracking branch, `git pull` will try to fetch changes from `origin` as the default. If this is the case, you can either set `upstream/hw1` as the tracking branch with `git branch -u upstream hw1` or just specify the remote when you pull with `git pull upstream`.
-
-See our course page on our [Development Environment](https://wustl-data.github.io/sp23/devenv) for more information on how our git workflow is configured.
-
-## Autograder
-
-Our autograder is simply a GitHub Action that runs the tests in your code. Run the command `pytest` to try out these tests locally. The GitHub Action currently runs any time you push the code to GitHub. I am configuring our setup to only run the autograder on designated submission branches to reduce the noise of unnecessary test runs-- stay tuned for updates.
+Notes:
+- This repository was initially built from the sp23-assignments repository in wustl-data (in order to streamline access to poetry and other python modules). All branches besides 'main' have been deleted, as they are not germane to this project.
