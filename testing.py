@@ -3,7 +3,6 @@ import requests
 import os
 from dotenv import load_dotenv
 import lxml
-import beautifulsoup4 as bs4
 
 year = 2022
 table_label = 'games'
