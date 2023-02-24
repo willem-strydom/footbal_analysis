@@ -18,10 +18,14 @@ url = "https://www.pro-football-reference.com/teams/sea/2022/gamelog/#all_gamelo
 table_number = 0
 
 df = table_from_url(0,url)
-with pd.option_context('display.max_rows', None,
-                       'display.max_columns', None,
-                       'display.precision', 3,
-                       ):
-    print(df)
+# with pd.option_context('display.max_rows', None,
+#                        'display.max_columns', None,
+#                        'display.precision', 3,
+#                        ):
+print(df.head())
+column_names = list(df.columns.values)
+print(column_names)
+
+
 
 
