@@ -50,4 +50,3 @@ def retrieve_player_data(player_full_name : str, year : int) -> pd.DataFrame():
 # mahomes = retrieve_player_data('Patrick Mahomes', 2022)
 # print(mahomes)
 
-
