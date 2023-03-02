@@ -1,0 +1,9 @@
+#mkdocs.yaml
+site_name: The Sports Group
+
+theme:
+  name: "material"
+
+plugins:
+- search
+- mkdocstrings
