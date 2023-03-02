@@ -14,3 +14,6 @@ Deliverables:
 
 Notes:
 - This repository was initially built from the sp23-assignments repository in wustl-data (in order to streamline access to poetry and other python modules). All branches besides 'main' have been deleted, as they are not germane to this project.
+
+Part 1 Documentation: 
+- The entirety of our data for this project up to this point has been sourced from https://www.pro-football-reference.com, an all encompassing NFL statistical database. Our group made API calls to accumulate targeted data from the website and add to an aggregate dataframe. TO BE CONTINUED... 
