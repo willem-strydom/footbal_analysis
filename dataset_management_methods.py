@@ -4,16 +4,34 @@ import json
 import geopy.distance
 
 def save(dataset : pd.DataFrame):
+    """save a pd df to a csv
+
+    args:
+        dataset (pd.DataFrame): pandas DataFrame
+    returns:
+        none
+    """
     dataset.to_csv("data/fake_records.csv")
 
 def load(path : str) -> pd.DataFrame:
+    """loads a csv file to pandass DataFrame
+    args:
+        path: file path to csv file
+    returns:
+    (pd.DataFrame): pandas DataFrame
+    """
     dataframe = pd.read_csv(path)
     return dataframe
 
-#given two team names, this function returns a very close approximation of 
-#the straight-line distance, in miles, from one team's stadium to the other;
-#this is a good approximation of how far a team must travel for a game
+
 def calculate_distance(team1 : str, team2 : str) -> float:
+    """calculates travel distance in miles between the home statium of two teams
+    args:
+        team1 (string): full name of team
+        team2 (string): full name of team
+    returns:
+        (float): distance between teams in miles
+    """
     coordinates = {
         "ARI" : (33.5279053111993, -112.26248802923699),
         "ATL" : (33.75658104611166, -84.4012431938295),

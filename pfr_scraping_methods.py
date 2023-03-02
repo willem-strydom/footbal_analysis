@@ -9,6 +9,14 @@ import dataset_management_methods as dmm
 #team_abbr here is whatever pro_football_reference uses in the html, not necessarily what the NFL uses as the abbrevation
 #could be useful to write a function that can convert a team name to the abbreviation later on
 def retrieve_team_data(team_abbr : str, year : int) -> pd.DataFrame():
+    """
+    gets datafrom from pro football refernce
+    args:
+        team_abbr (string): abbreviation accourding to pro football reference, may be different than nfl's usage
+        year (int): year?
+    returns:
+        pandas dataframe
+    """
     table_label = 'games'
     abbr = team_abbr.lower()
     url = f'https://www.pro-football-reference.com/teams/{abbr}/{year}.htm#{table_label}'
@@ -22,7 +30,14 @@ def retrieve_team_data(team_abbr : str, year : int) -> pd.DataFrame():
     return team_data
 
 #alters name format to make string easier to parse for url
-def fix_name(full_name : str) -> str:
+def fix_name(full_name : str):
+    """
+    converts name to appropriate query value
+    args:
+        fulll_name: player name
+    returns:
+        name of player
+    """
     new_name = full_name.split()
     fixed_name = []
     for name in new_name:
@@ -32,6 +47,14 @@ def fix_name(full_name : str) -> str:
     return fixed_name
 
 def retrieve_player_data(player_full_name : str, year : int) -> pd.DataFrame():
+    """returns stats for a given player
+    args:
+        player_full_name (string): name of player
+        year (int): year
+    returns:
+        pandas DataFrame
+
+    """
     first_and_last = fix_name(player_full_name)
     unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '00'
     url = f'https://www.pro-football-reference.com/players/{first_and_last[0]}/{unique_player_string}/gamelog/{year}/'
