@@ -70,6 +70,13 @@ def retrieve_player_data(player_full_name : str, year : int) -> pd.DataFrame():
     return player_data
 
 def clean_and_normalize_dataset(df : pd.DataFrame) -> pd.DataFrame:
+    """returns normalized dataset
+        args:
+            df (pd.DataFrame): pandas data frame
+        returns:
+            cleaned and normalized pandas dataframe
+
+        """
     distances = [dmm.calculate_distance('SEA', opponent) for opponent in df['Opp']]
     df['Miles Traveled'] = distances
     df.loc[9, 'Miles Traveled'] = dmm.calculate_distance('SEA', 'GER')
