@@ -69,10 +69,18 @@ def retrieve_player_data(player_full_name : str, year : int) -> pd.DataFrame():
     player_data = player_data[['Date','','Opp','Rate']]
     return player_data
 
-def clean_and_normalize_dataset(df : pd.DataFrame) -> pd.DataFrame:
-    distances = [dmm.calculate_distance('SEA', opponent) for opponent in df['Opp']]
+def clean_and_normalize_dataset(df : pd.DataFrame, team_abbr : str) -> pd.DataFrame:
+    """returns a cleaned and normalized dataset for a given player
+    args:
+        df (pd.DataFrame): dataframe of player data
+    returns:
+        pandas DataFrame
+
+    """
+    distances = [dmm.calculate_distance(team_abbr, opponent) for opponent in df['Opp']]
     df['Miles Traveled'] = distances
-    df.loc[9, 'Miles Traveled'] = dmm.calculate_distance('SEA', 'GER')
+    if team_abbr == 'SEA':
+        df.loc[9, 'Miles Traveled'] = dmm.calculate_distance('SEA', 'GER')
     df = df.rename(columns={"":"Home/Away"})
     sites = []
     for site in df['Home/Away']:
@@ -82,3 +90,39 @@ def clean_and_normalize_dataset(df : pd.DataFrame) -> pd.DataFrame:
             sites.append(1)
     df['Home/Away'] = sites
     return df
+
+#our project is focused on the 2022 season, but we've added this year functionality to make the function more
+#user-friendly
+#THESE TWO FUNCTIONS ARE ADDITIONAL FEATURES WE'RE CURRENTLY WORKING ON THAT WILL BE HELPFUL FOR PART 2
+def get_top50_quarterbacks(year : int) -> list:
+    #scrape the list of quarterbacks from https://www.pro-football-reference.com/years/2022/passing.htm
+    url = f'https://www.pro-football-reference.com/years/{year}/passing.htm'
+    response = requests.get(url=url)
+    soup = BeautifulSoup(response.content, features="lxml")
+    headers = [th.getText() for th in soup.findAll('tr')[0].findAll('th')]
+    # print(headers)
+    rows = soup.findAll('tr', class_ = lambda table_rows: table_rows != "thead")
+    player_stats = [[td.getText() for td in rows[i].findAll('td')] for i in range(1,51)]
+    quarterback_names = [x[0] for x in player_stats]
+    remove_asterisks = [name.replace('*','') for name in quarterback_names]
+    remove_pluses = [name.replace('+','') for name in remove_asterisks]
+    updated_qb_names = remove_pluses
+    return updated_qb_names
+
+def concatenate_dataframes(qb_names : list) -> pd.DataFrame():
+    empty_list = []
+    for quarterback in qb_names:
+        qb = retrieve_player_data(quarterback, 2022)
+        updated_qb = clean_and_normalize_dataset(qb)
+        updated_qb['QB Name'] = quarterback
+        empty_list.append(updated_qb)
+    final_dataframe = pd.concat(empty_list)
+    #passing in a list of quarterbacks from get_all_quarterbacks
+    #create an empty list
+    #for each quarterback, run retrieve_player_data and clean_and_normalize_dataset
+        #add a column where every row in that column is the quarterback name
+        #append the dataframes to an empty list
+    #use pd.concat to "merge" the dataframes together; takes in a list of dataframes (i.e., list of quarterback dataframes)
+    return final_dataframe
+# test = get_top50_quarterbacks(2022)
+# print(concatenate_dataframes(test))

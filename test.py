@@ -8,9 +8,16 @@ from bs4 import BeautifulSoup
 import pfr_scraping_methods as pfr
 import dataset_management_methods as dmm
 
+#these are examples of ways you could call these functions to get player data
+#each player data dataframe is normalized to 3NF individually
+
 geno = pfr.retrieve_player_data('geno smith', 2022)
-geno_updated = pfr.clean_and_normalize_dataset(geno)
-print(geno_updated)
+geno_updated = pfr.clean_and_normalize_dataset(geno, 'SEA')
+dmm.save(geno_updated, 'geno')
+
+tlaw = pfr.retrieve_player_data('trevor lawrence', 2022)
+tlaw_updated = pfr.clean_and_normalize_dataset(tlaw, 'JAX')
+dmm.save(tlaw_updated, 'tlaw')
 
 
 

@@ -3,7 +3,7 @@ import pfr_scraping_methods
 import json
 import geopy.distance
 
-def save(dataset : pd.DataFrame):
+def save(dataset : pd.DataFrame, player : str):
     """save a pd df to a csv
 
     args:
@@ -11,7 +11,7 @@ def save(dataset : pd.DataFrame):
     returns:
         none
     """
-    dataset.to_csv("data/fake_records.csv")
+    dataset.to_csv(f"expected_data/{player}.csv")
 
 def load(path : str) -> pd.DataFrame:
     """loads a csv file to pandass DataFrame
