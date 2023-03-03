@@ -13,7 +13,7 @@ Deliverables:
 Notes:
 - This repository was initially built from the sp23-assignments repository in wustl-data (in order to streamline access to poetry and other python modules). We have tried our best to delete all holdover modules and scripts from that repo that are not relevant for our project, but some may still exist.
 
--IMPORTANT: To run 'mkdocs serve,' our project currently requires you to run 'cd my-project'. We are attempting to free up this functionality such that you don't have to cd into a directory, but those updates will roll out as this project progresses.
+- IMPORTANT: To run 'mkdocs serve,' our project currently requires you to run `cd my-project`. We are attempting to free up this functionality such that you don't have to cd into a directory, but those updates will roll out as this project progresses.
 
 Part 1 Documentation: 
 - The majority of our data for this project up to this point has been sourced from https://www.pro-football-reference.com, an all encompassing NFL statistical database. Our group made API calls to accumulate targeted data from this website and used the results of the calls to add to an aggregate dataframe. Additonally, longitude and latitude data was manually scraped to determine the location of all NFL stadiums to be used in travel distance calculations later on. 
@@ -21,10 +21,10 @@ Part 1 Documentation:
 - dataset_management_methods.py: `save` takes a parameter DataFrame and saves it as a .csv. `load` takes a parameter csv (either by local path or url) and returns it as a DataFrame. `calculate_distance` calculates travel distance in miles between the home stadiums of two teams.
 
 Data Normalization/Cleaning:
--In our `retrieve_player_data` function, we decided to drop columns from the initial dataframe constructed from the BeautifulSoup html data because most of the columns were not relevant to our project. We kept only the columns for the week, opponent, whether the game was home or away, and quarterback rating. As mentioned in the previous section, we created a `clean_and_normalize` dataset that encoded the home/away variable, updated columns labels to be more practical, and made sure our dataset was 3NF.
+- In our `retrieve_player_data` function, we decided to drop columns from the initial dataframe constructed from the BeautifulSoup html data because most of the columns were not relevant to our project. We kept only the columns for the week, opponent, whether the game was home or away, and quarterback rating. As mentioned in the previous section, we created a `clean_and_normalize` dataset that encoded the home/away variable, updated columns labels to be more practical, and made sure our dataset was 3NF.
 
 Groups:
--Tom/Sahil: worked on writing functions for scraping and storing the data
--William/Constin: worked on creating our mkdocs server and implementing mkdocs throughout the assignment
--Willem/Rohan: helped write functions for cleaning/normalizing the data as well as with the mkdocs and README
+- Tom/Sahil: worked on writing functions for scraping and storing the data
+- William/Constin: worked on creating our mkdocs server and implementing mkdocs throughout the assignment
+- Willem/Rohan: helped write functions for cleaning/normalizing the data as well as with the mkdocs and README
 
