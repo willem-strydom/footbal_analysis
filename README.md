@@ -24,7 +24,7 @@ Data Normalization/Cleaning:
 -In our `retrieve_player_data` function, we decided to drop columns from the initial dataframe constructed from the BeautifulSoup html data because most of the columns were not relevant to our project. We kept only the columns for the week, opponent, whether the game was home or away, and quarterback rating. As mentioned in the previous section, we created a `clean_and_normalize` dataset that encoded the home/away variable, updated columns labels to be more practical, and made sure our dataset was 3NF.
 
 Groups:
--Tom/Sahil --> worked on writing functions for scraping and storing the data
--William/Constin --> worked on creating our mkdocs server and implementing mkdocs throughout the assignment
--Willem/Rohan --> helped write functions for cleaning/normalizing the data as well as with the mkdocs and README
+-Tom/Sahil: worked on writing functions for scraping and storing the data
+-William/Constin: worked on creating our mkdocs server and implementing mkdocs throughout the assignment
+-Willem/Rohan: helped write functions for cleaning/normalizing the data as well as with the mkdocs and README
 
