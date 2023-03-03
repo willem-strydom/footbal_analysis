@@ -95,6 +95,13 @@ def clean_and_normalize_dataset(df : pd.DataFrame, team_abbr : str) -> pd.DataFr
 #user-friendly
 #THESE TWO FUNCTIONS ARE ADDITIONAL FEATURES WE'RE CURRENTLY WORKING ON THAT WILL BE HELPFUL FOR PART 2
 def get_top50_quarterbacks(year : int) -> list:
+    """returns a list of (quarterback, team_abbr) tuples
+    args:
+        year (int): a specific NFL season; for our project, this will be 2022
+    returns:
+        pandas DataFrame
+
+    """
     #scrape the list of quarterbacks from https://www.pro-football-reference.com/years/2022/passing.htm
     url = f'https://www.pro-football-reference.com/years/{year}/passing.htm'
     response = requests.get(url=url)
@@ -107,13 +114,26 @@ def get_top50_quarterbacks(year : int) -> list:
     remove_asterisks = [name.replace('*','') for name in quarterback_names]
     remove_pluses = [name.replace('+','') for name in remove_asterisks]
     updated_qb_names = remove_pluses
-    return updated_qb_names
+    team_abbreviations = [x[1] for x in player_stats]
+    merged_list = [(updated_qb_names[i], team_abbreviations[i]) for i in range(0, len(updated_qb_names))]
+    return merged_list
 
-def concatenate_dataframes(qb_names : list) -> pd.DataFrame():
+#For part 2 --> will need to add all the international games to the dict
+def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
+    """returns a dataframe with all qb information concatenated together
+    args:
+        qb_names_and_abbreviations (list): a list of (quarterback, team_abbr) tuples 
+    returns:
+        pandas DataFrame
+
+    """
     empty_list = []
-    for quarterback in qb_names:
+    for quarterback, team_abbrevation in qb_names_and_abbreviations:
         qb = retrieve_player_data(quarterback, 2022)
-        updated_qb = clean_and_normalize_dataset(qb)
+        print(qb)
+        print(team_abbrevation)
+        updated_qb = clean_and_normalize_dataset(qb, team_abbrevation)
+        # print(updated_qb)
         updated_qb['QB Name'] = quarterback
         empty_list.append(updated_qb)
     final_dataframe = pd.concat(empty_list)
@@ -124,5 +144,3 @@ def concatenate_dataframes(qb_names : list) -> pd.DataFrame():
         #append the dataframes to an empty list
     #use pd.concat to "merge" the dataframes together; takes in a list of dataframes (i.e., list of quarterback dataframes)
     return final_dataframe
-# test = get_top50_quarterbacks(2022)
-# print(concatenate_dataframes(test))
