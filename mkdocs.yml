@@ -1,0 +1,18 @@
+site_name: sports group documentation
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings
+
+nav:
+  - Home: index.md
+  - methods: dataset_management_methods.md
+  - collection: pfr_scraping_methods.md
+
+docs:
+  - Home: index.md
+  - API Reference:
+      - dataset_management_methods.py
+      - pfr_scraping_methods.py
+      - main.py
