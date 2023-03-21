@@ -1,5 +1,5 @@
 import pandas as pd
-import pfr_scraping_methods
+# import pfr_scraping_methods
 import json
 import geopy.distance
 
@@ -65,7 +65,9 @@ def calculate_distance(team1 : str, team2 : str) -> float:
         "TAM" : (27.975937833578584, -82.50335871624291),
         "TEN" : (36.16659318662702, -86.77130368128294),
         "WAS" : (38.907777053902784, -76.86463498137742),
-        "GER" : (48.21887120658412, 11.624723311594915)
+        "GER" : (48.21887120658412, 11.624723311594915),
+        "MEX" : (19.30293, -99.15054),
+        "LON" : (51.60433879666974, -0.06622593043569701)
     }
     coord1 = coordinates[team1]
     coord2 = coordinates[team2]

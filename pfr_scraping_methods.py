@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 import lxml
 from bs4 import BeautifulSoup
-import dataset_management_methods as dmm
+from dataset_management_methods import calculate_distance
 
 #team_abbr here is whatever pro_football_reference uses in the html, not necessarily what the NFL uses as the abbrevation
 #could be useful to write a function that can convert a team name to the abbreviation later on
@@ -77,10 +77,25 @@ def clean_and_normalize_dataset(df : pd.DataFrame, team_abbr : str) -> pd.DataFr
         pandas DataFrame
 
     """
-    distances = [dmm.calculate_distance(team_abbr, opponent) for opponent in df['Opp']]
+    distances = [calculate_distance(team_abbr, opponent) for opponent in df['Opp']]
     df['Miles Traveled'] = distances
-    if team_abbr == 'SEA':
-        df.loc[9, 'Miles Traveled'] = dmm.calculate_distance('SEA', 'GER')
+    #edge cases
+    if (team_abbr == 'SEA'):
+        df.loc[9, 'Miles Traveled'] = calculate_distance('SEA', 'GER')
+    if (team_abbr == 'TAM'):
+        df.loc[9, 'Miles Traveled'] = calculate_distance('TAM', 'GER')
+    if (team_abbr == 'NOR'):
+        df.loc[3, 'Miles Traveled'] = calculate_distance('NOR', 'LON')
+    if (team_abbr == 'MIN'):
+        df.loc[3, 'Miles Traveled'] = calculate_distance('MIN', 'LON')  
+    if (team_abbr == 'GNB'):
+        df.loc[4, 'Miles Traveled'] = calculate_distance('GNB', 'LON')
+    if (team_abbr == 'NYG'):
+        df.loc[4, 'Miles Traveled'] = calculate_distance('NYG', 'LON')
+    if (team_abbr == 'DEN'):
+        df.loc[7, 'Miles Traveled'] = calculate_distance('DEN', 'MEX')
+    if (team_abbr == 'JAX'):
+        df.loc[7, 'Miles Traveled'] = calculate_distance('JAX', 'MEX')
     df = df.rename(columns={"":"Home/Away"})
     sites = []
     for site in df['Home/Away']:
@@ -118,6 +133,8 @@ def get_top50_quarterbacks(year : int) -> list:
     merged_list = [(updated_qb_names[i], team_abbreviations[i]) for i in range(0, len(updated_qb_names))]
     return merged_list
 
+# print(get_top50_quarterbacks(2022))
+
 #For part 2 --> will need to add all the international games to the dict
 def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
     """returns a dataframe with all qb information concatenated together
@@ -129,9 +146,9 @@ def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
     """
     empty_list = []
     for quarterback, team_abbrevation in qb_names_and_abbreviations:
-        qb = retrieve_player_data(quarterback, 2022)
-        print(qb)
         print(team_abbrevation)
+        qb = retrieve_player_data(quarterback, 2022)
+        # print(qb)
         updated_qb = clean_and_normalize_dataset(qb, team_abbrevation)
         # print(updated_qb)
         updated_qb['QB Name'] = quarterback
@@ -144,3 +161,6 @@ def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
         #append the dataframes to an empty list
     #use pd.concat to "merge" the dataframes together; takes in a list of dataframes (i.e., list of quarterback dataframes)
     return final_dataframe
+
+qbs = get_top50_quarterbacks(2022)
+print(concatenate_dataframes(qbs))

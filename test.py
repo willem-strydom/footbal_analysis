@@ -19,6 +19,9 @@ tlaw = pfr.retrieve_player_data('trevor lawrence', 2022)
 tlaw_updated = pfr.clean_and_normalize_dataset(tlaw, 'JAX')
 dmm.save(tlaw_updated, 'tlaw')
 
+mahomes = pfr.retrieve_player_data('PATRICK MAHOMES', 2022)
+mahomes_updated = pfr.clean_and_normalize_dataset(mahomes, 'KAN')
+dmm.save(mahomes_updated, 'mahomes')
 
 
 
