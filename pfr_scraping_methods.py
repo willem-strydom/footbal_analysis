@@ -56,7 +56,21 @@ def retrieve_player_data(player_full_name : str, year : int) -> pd.DataFrame():
 
     """
     first_and_last = fix_name(player_full_name)
-    unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '00'
+    need_01 = ['Joe Burrow', 'Dak Prescott', 'Marcus Mariota', 'Mike White', 'Tyler Huntley']
+    need_02 = ['Josh Allen', 'Derek Carr', 'Davis Mills']
+    need_05 = ['Daniel Jones', 'Mac Jones']
+    #edge cases
+    name = " ".join(first_and_last)
+    if name in need_01:
+       unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '01'
+    else:
+        if name in need_02:
+            unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '02'
+        else:
+            if name in need_05:
+                unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '05'
+            else:
+                unique_player_string = first_and_last[1][:4] + first_and_last[0][:2] + '00'
     url = f'https://www.pro-football-reference.com/players/{first_and_last[0]}/{unique_player_string}/gamelog/{year}/'
     response = requests.get(url=url)
     soup = BeautifulSoup(response.content, features="lxml")
@@ -77,8 +91,16 @@ def clean_and_normalize_dataset(df : pd.DataFrame, team_abbr : str) -> pd.DataFr
         pandas DataFrame
 
     """
-    distances = [calculate_distance(team_abbr, opponent) for opponent in df['Opp']]
-    df['Miles Traveled'] = distances
+    #need to include the edge case of the Bengals/Bills cancelling their week 17 game
+    copy = df.copy()
+    mask = copy.index<16
+    if team_abbr == 'CIN':
+        copy = copy.loc[mask, :]
+    if team_abbr == 'BUF':
+        copy = copy.loc[mask, :]
+    distances = [calculate_distance(team_abbr, opponent) for opponent in copy['Opp']]
+    copy.loc[:, 'Miles Traveled'] = distances
+    df = copy
     #edge cases
     if (team_abbr == 'SEA'):
         df.loc[9, 'Miles Traveled'] = calculate_distance('SEA', 'GER')
@@ -109,7 +131,7 @@ def clean_and_normalize_dataset(df : pd.DataFrame, team_abbr : str) -> pd.DataFr
 #our project is focused on the 2022 season, but we've added this year functionality to make the function more
 #user-friendly
 #THESE TWO FUNCTIONS ARE ADDITIONAL FEATURES WE'RE CURRENTLY WORKING ON THAT WILL BE HELPFUL FOR PART 2
-def get_top50_quarterbacks(year : int) -> list:
+def get_top25_quarterbacks(year : int) -> list:
     """returns a list of (quarterback, team_abbr) tuples
     args:
         year (int): a specific NFL season; for our project, this will be 2022
@@ -124,7 +146,7 @@ def get_top50_quarterbacks(year : int) -> list:
     headers = [th.getText() for th in soup.findAll('tr')[0].findAll('th')]
     # print(headers)
     rows = soup.findAll('tr', class_ = lambda table_rows: table_rows != "thead")
-    player_stats = [[td.getText() for td in rows[i].findAll('td')] for i in range(1,51)]
+    player_stats = [[td.getText() for td in rows[i].findAll('td')] for i in range(1,26)]
     quarterback_names = [x[0] for x in player_stats]
     remove_asterisks = [name.replace('*','') for name in quarterback_names]
     remove_pluses = [name.replace('+','') for name in remove_asterisks]
@@ -146,7 +168,6 @@ def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
     """
     empty_list = []
     for quarterback, team_abbrevation in qb_names_and_abbreviations:
-        print(team_abbrevation)
         qb = retrieve_player_data(quarterback, 2022)
         # print(qb)
         updated_qb = clean_and_normalize_dataset(qb, team_abbrevation)
@@ -161,6 +182,3 @@ def concatenate_dataframes(qb_names_and_abbreviations : list) -> pd.DataFrame():
         #append the dataframes to an empty list
     #use pd.concat to "merge" the dataframes together; takes in a list of dataframes (i.e., list of quarterback dataframes)
     return final_dataframe
-
-qbs = get_top50_quarterbacks(2022)
-print(concatenate_dataframes(qbs))
