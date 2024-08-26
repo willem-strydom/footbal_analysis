@@ -1,17 +1,9 @@
-# Welcome to MkDocs
+# Welcome to "Sports Group Project"
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-## Commands
+## ETL overview
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Data is scraped from ProFootballReference.com via "pfr_scraping_methods.py", and loaded into bigquery for warehousing. 
+Transformation is done by sql models, and testing is being performed with pytest. Bottlenecks included
+performing tests with sql, getting big query extractor to work, and also getting mkdocs to work. Because big query was
+not working, we had to directly import the model outputs as csvs into our project o perform pytests
